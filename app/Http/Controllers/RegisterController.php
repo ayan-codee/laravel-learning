@@ -4,15 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\register;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class RegisterController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function __construct()
     {
-        //
+       
+    }
+    public function welcome()
+    {
+        return view('welcome');
     }
 
     /**
@@ -33,8 +35,8 @@ class RegisterController extends Controller
     public function registercheck(Request $request)
     {
        
-        // register::create($request->all());
-        // return redirect()->route('login');
+        register::create($request->all());
+        return redirect()->route('login');
     }
 
 
@@ -45,9 +47,11 @@ class RegisterController extends Controller
                 ->first(); 
 
         if($user){
-            session(['username'=>$user->name,
-                      'email'=>$user->email]);
-        return view('welcome');
+            session([
+                'username'=>$user->name,
+                      'email'=>$user->email
+                      ]);
+                       return redirect()->route('welcome');
       }else{
         echo "worng data fahhhhhhhhhhhh";
       }
@@ -80,8 +84,9 @@ class RegisterController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(register $register)
+    public function logout(register $register)
     {
-        //
+        session()->flush();
+        return redirect()->route('login');
     }
 }
