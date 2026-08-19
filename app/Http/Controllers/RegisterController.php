@@ -57,33 +57,25 @@ class RegisterController extends Controller
       }
     }
 
-    /**
-     * Display the specified resource.
-     */
+   
     public function show(register $register)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+   
     public function edit(register $register)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+   
     public function update(Request $request, register $register)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+  
     public function logout(register $register)
     {
         session()->flush();
