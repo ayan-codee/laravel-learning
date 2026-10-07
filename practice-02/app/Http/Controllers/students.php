@@ -3,16 +3,25 @@
 namespace App\Http\Controllers;
 
 use App\Models\Students as ModelsStudents;
-use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
 
 class students extends Controller
 {
-    function upload(Request $req){
-      $file = $req->file('file')->store('public');
-      $fileArrName = explode('/', $file); 
-      $fileName = $fileArrName[1];
-      return view('home',['file'=>$fileName]);
+    function add(Request $request){
+      $student =  new ModelsStudents();
+      $student->name = $request->fullName;
+      $student->batch = $request->batch;
+      $student->cource = $request->course;
+      
+      if($student->save()){
+        echo "submitted successfully";
+      }else{
+        echo "failed try again later";
+      }
+    }
+
+    function list(){
+      $studentData = ModelsStudents::all();
+      return view('list-student', ['students'=>$studentData]);
     }
 }
