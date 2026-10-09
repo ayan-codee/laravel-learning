@@ -32,6 +32,11 @@
 <body>
 
     <h2>Student Records</h2>
+    <form action="/list/search">
+        <h2>search data by name</h2>
+        <input type="text" placeholder="enter your name" name="searchname" id="">
+        <button>search now</button>
+    </form>
 
     <table>
         <thead>
@@ -40,6 +45,7 @@
                 <th>batch</th>
                 <th>name</th>
                 <th>cource</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -48,7 +54,11 @@
                 <td>{{$std->id}}</td>
                 <td>{{$std->name}}</td>
                 <td>{{$std->batch}}</td>
-                <td>{{$std->cource}}</td>   
+                <td>{{$std->cource}}</td>  
+                <td>
+                    <a href="list/delete/{{$std->id}}">delete</a>
+                    <a href="list/update/{{$std->id}}">update</a>
+                </td> 
             </tr>
             @endforeach
         </tbody>
